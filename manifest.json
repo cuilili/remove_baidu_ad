@@ -1,0 +1,26 @@
+{
+  "name": "移除百度广告",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "移除百度搜索页面插入的广告",
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "icon48.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "webRequest"
+  ],
+   "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  }
+}
