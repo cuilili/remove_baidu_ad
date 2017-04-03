@@ -1,4 +1,6 @@
 var hit_count = 0;
+var enable = true;
+
 chrome.browserAction.setBadgeBackgroundColor({color: '#0000FF'});
 chrome.browserAction.setBadgeText({text: "" + hit_count});
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
@@ -16,8 +18,16 @@ function inject_jscode_to_page(tabId){
 }
 
 chrome.webRequest.onCompleted.addListener(function(details){
-	inject_jscode_to_page(details.tabid);
+	if(enable){
+		inject_jscode_to_page(details.tabid);
+	}
 }, {
 	urls: ["*://*.baidu.com/*"],
 	types: ["script", "xmlhttprequest", "sub_frame"]
 }, ["responseHeaders"]);
+
+chrome.browserAction.onClicked.addListener(function() {
+	enable = !enable;
+	var icon_path = enable ? "icon48.png" : "icon48_disable.gif";
+	chrome.browserAction.setIcon({path:icon_path});
+});
