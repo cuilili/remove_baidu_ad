@@ -32,7 +32,7 @@ function run_code(){
 	return hit_count;
 }
 
-if(document.location.host.indexOf('baidu.com') != -1){
+function main(){
 	var ret = run_code();
 	if(ret == 0){
 		window.setTimeout(run_code, 500);
@@ -41,3 +41,5 @@ if(document.location.host.indexOf('baidu.com') != -1){
 		'hit_count': ret
 	}, null);
 }
+
+main();
