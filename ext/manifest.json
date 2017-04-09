@@ -1,6 +1,6 @@
 {
   "name": "移除百度广告",
-  "version": "1.3",
+  "version": "1.4",
   "manifest_version": 2,
   "description": "移除百度搜索页面插入的广告",
   "browser_action": {

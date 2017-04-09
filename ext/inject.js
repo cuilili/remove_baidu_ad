@@ -14,6 +14,7 @@ function hidden_ad(mark_element){
 	var content_left = document.getElementById("content_left");
 	var element = mark_element;
 	while(element){
+		console.log(element);
 		if (element.parentNode == content_left) {
 			var e = element.parentNode.removeChild(element);
 			console.log(e);
@@ -29,17 +30,22 @@ function run_code(){
 		hidden_ad(result[i]);
 		hit_count += 1
 	}
-	return hit_count;
+	if(hit_count > 0){
+		chrome.runtime.sendMessage({
+			'hit_count': hit_count
+		}, null);
+	}
 }
 
 function main(){
-	var ret = run_code();
-	if(ret == 0){
-		window.setTimeout(run_code, 500);
-	}
-	chrome.runtime.sendMessage({
-		'hit_count': ret
-	}, null);
+	run_code();
+	var inter = window.setInterval(function(){
+		run_code();
+	}, 100);
+
+	window.setTimeout(function(){
+		window.clearInterval(inter)
+	}, 2000);
 }
 
 main();
