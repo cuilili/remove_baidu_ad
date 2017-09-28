@@ -13,14 +13,17 @@ function find_ad_mark(){
 function hidden_ad(mark_element){
 	var content_left = document.getElementById("content_left");
 	var element = mark_element;
+	var count = 0;
 	while(element){
 		//console.log(element);
 		if (element.parentNode == content_left) {
 			var e = element.parentNode.removeChild(element);
 			//console.log(e);
+			count += 1;
 		}
 		element =element.parentNode;
 	}
+	return count;
 }
 
 function run_code(){
@@ -29,8 +32,7 @@ function run_code(){
 	result = ad_marks.concat(result);
 	var hit_count = 0;
 	for (var i = result.length - 1; i >= 0; i--) {
-		hidden_ad(result[i]);
-		hit_count += 1
+		hit_count = hidden_ad(result[i]);
 	}
 	if(hit_count > 0){
 		chrome.runtime.sendMessage({
