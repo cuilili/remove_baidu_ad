@@ -14,17 +14,19 @@ function hidden_ad(mark_element){
 	var content_left = document.getElementById("content_left");
 	var element = mark_element;
 	while(element){
-		console.log(element);
+		//console.log(element);
 		if (element.parentNode == content_left) {
 			var e = element.parentNode.removeChild(element);
-			console.log(e);
+			//console.log(e);
 		}
 		element =element.parentNode;
 	}
 }
 
 function run_code(){
-	var result = find_ad_mark();
+	var result = document.querySelectorAll("div[style='display:block !important;visibility:visible !important']")
+	var ad_marks = find_ad_mark();
+	result = ad_marks.concat(result);
 	var hit_count = 0;
 	for (var i = result.length - 1; i >= 0; i--) {
 		hidden_ad(result[i]);
@@ -41,11 +43,11 @@ function main(){
 	run_code();
 	var inter = window.setInterval(function(){
 		run_code();
-	}, 100);
+	}, 50);
 
 	window.setTimeout(function(){
 		window.clearInterval(inter)
-	}, 2000);
+	}, 5000);
 }
 
 main();
